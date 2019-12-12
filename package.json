@@ -1,0 +1,24 @@
+{
+  "name": "native-blog",
+  "version": "1.0.0",
+  "description": "js native,simple blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development",
+    "dev:watch": "webpack --mode development --watch",
+    "start": "webpack-dev-server --mode development"
+  },
+  "keywords": [
+    "js"
+  ],
+  "author": "penta-kai",
+  "license": "ISC",
+  "devDependencies": {
+    "html-webpack-plugin": "^4.0.0-beta.11",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  }
+}
