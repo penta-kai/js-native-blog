@@ -25,7 +25,7 @@ function submitCreateForm(event) {
 
     if (form.validate()) {
         console.log(form.values());
-    } else {
-        console.log('Form is invalid!');
+
+        form.clear();
     }     
 }

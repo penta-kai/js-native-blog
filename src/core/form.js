@@ -17,6 +17,10 @@ export class Form {
         return values;
     }
 
+    clear() {
+        this.$form.reset();
+    }
+
     validate() {
         const isValid = this.isValid();
         
