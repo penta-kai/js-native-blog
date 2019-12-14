@@ -3,10 +3,16 @@ import {Component} from '../core/component';
 export class NavigationComponent extends Component {
     constructor(id) {       
         super(id);
+
+        this.tabs = [];
     }
 
     init() {
         this.$rootItem.addEventListener('click', tabClickHandler.bind(this));
+    }
+
+    registerTabs(tabs) {
+        this.tabs = tabs;
     }
 }
 
@@ -24,35 +30,22 @@ function tabClickHandler(event) {
             return;
         }
         
-        if (activeNavName) {
-            deactivateNav($activeNav);
+        deactivateNav($activeNav);     
+        activateNav($targetNav);
 
-            const $activeTab = document.getElementById(activeNavName); 
-            deactivateTab($activeTab);
-        }       
+        this.tabs.forEach(tab => {
+            tab.component.hide();
+        });
         
-        if (selectNavName) {
-            activateNav($targetNav);
-
-            const $selectTab = document.getElementById(selectNavName);
-            activateTab($selectTab);
-        }
-        
+        const selectTab = this.tabs.find(tab => tab.name === selectNavName);
+        selectTab.component.show();
     }
 }
 
 function deactivateNav($nav) {
     $nav.classList.remove('active');
 }
+
 function activateNav($nav) {
     $nav.classList.add('active');
-}
-
-function activateTab($tab) {
-    $tab.classList.add('hide');
-    $tab.classList.remove('active');
-}
-function deactivateTab($tab) {
-    $tab.classList.remove('hide');
-    $tab.classList.add('active');
 }
