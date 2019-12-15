@@ -1,6 +1,7 @@
 import {Component} from '../core/component';
 import {Form} from '../core/form';
 import {Validators} from '../core/validators';
+import {apiService} from '../services/api.service';
 
 export class CreateComponent extends Component {
     constructor(id) {
@@ -12,7 +13,7 @@ export class CreateComponent extends Component {
     }
 }
 
-function submitCreateForm(event) {
+async function submitCreateForm(event) {
     event.preventDefault();
 
     const form = new Form(
@@ -24,8 +25,15 @@ function submitCreateForm(event) {
     );
 
     if (form.validate()) {
-        console.log(form.values());
+        const formData = {
+            date: new Date().toLocaleDateString(),
+            ...form.values()
+        };
+        
+        await apiService.createPost(formData);
 
         form.clear();
+
+        alert('Запись создана в базе данный.');
     }     
 }
